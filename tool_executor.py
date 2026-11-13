@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from typing import Any, Callable, Dict, Optional
 
 class ToolExecutor:
     """
@@ -7,7 +7,7 @@ class ToolExecutor:
     def __init__(self):
         self.tools: Dict[str, Dict[str, Any]] = {}
 
-    def registerTool(self, name: str, description: str, func: callable):
+    def registerTool(self, name: str, description: str, func: Callable[..., str]):
         """
         向工具箱中注册一个新工具。
         """
@@ -16,7 +16,7 @@ class ToolExecutor:
         self.tools[name] = {"description": description, "func": func}
         print(f"工具 '{name}' 已注册。")
 
-    def getTool(self, name: str) -> callable:
+    def getTool(self, name: str) -> Optional[Callable[..., str]]:
         """
         根据名称获取一个工具的执行函数。
         """
